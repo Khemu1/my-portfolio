@@ -1,6 +1,6 @@
 export const projects = [
   {
-    id: 1,
+    id: 55,
     category: "Fullstack",
     title: "Prime Academy ",
     description: `A modern E-learning platform that supports both locally uploaded videos and YouTube videos. It features an interactive quiz system inspired by Quizizz, allows awarding prizes to students, and includes a robust chat system between students and teachers.
