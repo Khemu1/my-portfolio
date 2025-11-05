@@ -7,21 +7,19 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const pathname = usePathname();
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div key={pathname} className="relative">
+    <AnimatePresence>
+      <div key={pathname}>
         <motion.div
           initial={{ opacity: 1 }}
-          animate={{ opacity: 0 }}
-          exit={{ opacity: 0 }}
-          transition={{ delay: 1, duration: 0.4, ease: "easeInOut" }}
-          className="fixed inset-0 bg-primary pointer-events-none z-50"
+          animate={{
+            opacity: 0,
+            transition: { delay: 1, duration: 0.4, ease: "easeInOut" },
+          }}
+          className="h-screen w-screen fixed bg-primary top-0 pointer-events-none"
         />
-        <div className="min-h-screen overflow-x-hidden overflow-y-auto">
-          {children}
-        </div>
-      </motion.div>
+        {children}
+      </div>
     </AnimatePresence>
   );
 };
