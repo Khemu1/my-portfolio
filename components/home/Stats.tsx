@@ -40,6 +40,7 @@ const Stats = () => {
                 end={stat.value}
                 duration={5}
                 delay={1}
+                decimals={stat.value % 1 !== 0 ? 1 : 0} // show 1 decimal if value is not integer
                 className="text-4xl xl:text-6xl font-extrabold"
               />
               <p
