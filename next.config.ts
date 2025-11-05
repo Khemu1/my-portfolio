@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
         hostname: "i.postimg.cc",
         pathname: "**",
       },
+      {
+        protocol: "https",
+        hostname: "github-readme-stats-seven-pi-75.vercel.app",
+        pathname: "**",
+      },
     ],
   },
 };

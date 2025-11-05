@@ -17,10 +17,10 @@ export const personal = {
 };
 
 export const stats = [
-  { name: "Years of Experience", value: 1 },
-  { name: "Free Lancing Projects", value: 2 },
+  { name: "Years of Experience", value: 2 },
+  { name: "Free Lancing Projects", value: 3 },
   { name: "Side Projects", value: 62 },
-  { name: "Code Commits", value: 1456 },
+  { name: "Code Commits", value: 0 },
 ];
 
 export const services = [

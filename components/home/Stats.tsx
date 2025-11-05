@@ -1,8 +1,32 @@
 "use client";
+import { useEffect, useState } from "react";
 import CountUp from "react-countup";
-import { stats } from "@/data";
+import { stats as baseStats } from "@/data";
 
 const Stats = () => {
+  const [stats, setStats] = useState(baseStats);
+
+  useEffect(() => {
+    const fetchCommits = async () => {
+      try {
+        const res = await fetch("/api/commits");
+        const data = await res.json();
+
+        setStats((prev) =>
+          prev.map((stat) =>
+            stat.name === "Code Commits"
+              ? { ...stat, value: data.totalCommits }
+              : stat
+          )
+        );
+      } catch (err) {
+        console.error("Failed to load commits:", err);
+      }
+    };
+
+    fetchCommits();
+  }, []);
+
   return (
     <section className="pt-4 pb-12 xl:pt-24 xl:pb-0">
       <div className="container mx-auto">
@@ -15,7 +39,7 @@ const Stats = () => {
               <CountUp
                 end={stat.value}
                 duration={5}
-                delay={2}
+                delay={1}
                 className="text-4xl xl:text-6xl font-extrabold"
               />
               <p
