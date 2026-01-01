@@ -69,7 +69,6 @@ const Work = () => {
                     className="text-xl text-accent bg-surface-dark px-3 py-1 rounded-full glass"
                   >
                     {stack.name}
-                    {index !== activeProject.stack.length - 1 && ","}
                   </li>
                 ))}
               </ul>
