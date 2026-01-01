@@ -29,7 +29,8 @@ const ImagesSwiper: React.FC<{ images: string[]; title: string }> = ({
             alt={`Project image ${currentIndex + 1}`}
             fill
             className="object-contain rounded-md shadow-lg"
-            sizes="(max-width: 640px) 100vw, 800px"
+            quality={90}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1000px"
           />
 
           {/* Navigation Buttons */}
