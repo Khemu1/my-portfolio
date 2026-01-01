@@ -15,14 +15,14 @@ const Stairs = () => {
             ease: "easeInOut",
             delay: 0.1 * reverseIndex(index),
           }}
-          className="h-full w-full bg-[#17171c] relative "
+          className="h-full w-full bg-surface-dark relative"
         ></motion.div>
       ))}
     </>
   );
 };
 
-// caling reverse index for staggered delay
+// calculating reverse index for staggered delay
 const reverseIndex = (index: number) => {
   const totalSteps = 6;
   return totalSteps - index;

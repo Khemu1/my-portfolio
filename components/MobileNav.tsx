@@ -20,7 +20,7 @@ const MobileNav = () => {
       <SheetTrigger className="flex justify-center items-center">
         <CiMenuFries className="text-[32px] text-accent transition-all" />
       </SheetTrigger>
-      <SheetContent className="flex flex-col transition-transform duration-300 ease-in-out">
+      <SheetContent className="flex flex-col transition-transform duration-300 ease-in-out bg-surface-dark border-accent/20">
         <SheetTitle className="sr-only">Mobile Navigation</SheetTitle>
         <div className="mt-32 mb-24 text-center text-2xl">
           <Link href="/">
@@ -39,7 +39,7 @@ const MobileNav = () => {
               key={index}
               className={`${
                 link.path === pathname && "text-accent border-b-2 border-accent"
-              } transtion-all hover:text-accent`}
+              } transition-all hover:text-accent text-xl`}
             >
               {link.name}
             </Link>

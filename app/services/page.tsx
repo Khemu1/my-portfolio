@@ -6,7 +6,7 @@ import { services } from "@/data";
 import Link from "next/link";
 const Services = () => {
   return (
-    <section className="flex flex-col justify-center py-12 lx:py-0 min-h-[80vh] ">
+    <section className="flex flex-col justify-center py-12 xl:py-0 min-h-[80vh]">
       <div className="container mx-auto">
         <motion.div
           initial={{ opacity: 0 }}
@@ -24,13 +24,18 @@ const Services = () => {
                 <div className="font-extrabold text-5xl text-outline text-transparent transition-all duration-500 group-hover:text-outline-hover">
                   {service.number}
                 </div>
-                <Link href="/contact" className="flex justify-center items-center w-[70px] h-[70px] rounded-full bg-white hover:rotate-[-45deg] group-hover:bg-accent transition-all duration-500">
-                  <BsArrowDownRight className="text-primary text-3xl" />
+                <Link
+                  href="/contact"
+                  className="flex justify-center items-center w-[70px] h-[70px] rounded-full bg-accent hover:rotate-[-45deg] group-hover:bg-accent-hover transition-all duration-500 hover:scale-110"
+                >
+                  <BsArrowDownRight className="text-white text-3xl" />
                 </Link>
               </div>
-              <h2 className="font-semibold text-2xl">{service.title}</h2>
-              <p className="text-white/60">{service.description}</p>
-              <div className="border-b border-white/20 w-full"></div>
+              <h2 className="font-semibold text-2xl text-white">
+                {service.title}
+              </h2>
+              <p className="text-white/60 text-lg">{service.description}</p>
+              <div className="border-b border-accent/30 w-full"></div>
             </div>
           ))}
         </motion.div>

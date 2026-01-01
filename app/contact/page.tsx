@@ -99,17 +99,17 @@ const Contact = () => {
         <div className="flex flex-col xl:flex-row gap-[30px]">
           <div className="xl:h-[54%] xl:w-[550px] order-2 xl:order-none">
             <form
-              className="flex flex-col gap-6 p-10 bg-[#27272c] rounded-xl"
+              className="flex flex-col gap-6 p-10 bg-surface-dark rounded-xl "
               onSubmit={handleSubmit}
             >
-              <h3 className="text-4xl text-accent">
+              <h3 className="text-4xl text-accent bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
                 Let&lsquo;s work together
               </h3>
               <div className="grid grid-cols-1 md:grid-2 gap-6">
                 <Input
                   type="text"
                   placeholder="First Name"
-                  className=""
+                  className="bg-surface-light border-accent/30 focus:border-accent"
                   required={true}
                   onChange={(e) =>
                     setData({ ...data, firstName: e.target.value })
@@ -119,7 +119,7 @@ const Contact = () => {
                 <Input
                   type="text"
                   placeholder="Last Name"
-                  className=""
+                  className="bg-surface-light border-accent/30 focus:border-accent"
                   required={true}
                   onChange={(e) =>
                     setData({ ...data, lastName: e.target.value })
@@ -129,7 +129,7 @@ const Contact = () => {
                 <Input
                   type="email"
                   placeholder="Email Address"
-                  className=""
+                  className="bg-surface-light border-accent/30 focus:border-accent"
                   required={true}
                   onChange={(e) => setData({ ...data, email: e.target.value })}
                   value={data.email}
@@ -137,7 +137,7 @@ const Contact = () => {
                 <Input
                   type="tel"
                   placeholder="Phone"
-                  className=""
+                  className="bg-surface-light border-accent/30 focus:border-accent"
                   required={true}
                   onChange={(e) => setData({ ...data, phone: e.target.value })}
                   value={data.phone}
@@ -148,13 +148,19 @@ const Contact = () => {
                 onValueChange={(e) => setData({ ...data, service: e })}
                 value={data.service}
               >
-                <SelectTrigger className="w-full">
-                  <SelectValue placeholder="Select a service"></SelectValue>
-                  <SelectContent>
+                <SelectTrigger className="w-full bg-surface-light border-accent/30 focus:border-accent">
+                  <SelectValue placeholder="Select a Service"></SelectValue>
+                  <SelectContent className="bg-surface-dark border-accent/30">
                     <SelectGroup>
-                      <SelectLabel>Select a service</SelectLabel>
+                      <SelectLabel className="text-accent">
+                        Select a Service
+                      </SelectLabel>
                       {services.map((service, index) => (
-                        <SelectItem key={index} value={service.value}>
+                        <SelectItem
+                          key={index}
+                          value={service.value}
+                          className="hover:bg-surface-light"
+                        >
                           {service.name}
                         </SelectItem>
                       ))}
@@ -163,19 +169,23 @@ const Contact = () => {
                 </SelectTrigger>
               </Select>
               <Textarea
-                className="h-[200px] "
+                className="h-[200px] bg-surface-light border-accent/30 focus:border-accent"
                 placeholder="Type your message here."
                 onChange={(e) => setData({ ...data, message: e.target.value })}
                 value={data.message}
               />
-              <Button className="max-w-40" size={"md"} disabled={isSubmitting}>
+              <Button
+                className="max-w-40 bg-accent hover:bg-accent-hover"
+                size={"md"}
+                disabled={isSubmitting}
+              >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </Button>
-              <p className="text-center text-xl text-accent ">
-                {success && !error && "Message Sent Successfully"}
+              <p className="text-center text-xl text-success">
+                {success && !error && "✓ Message Sent Successfully"}
               </p>
-              <p className="text-center text-xl text-accent">
-                {!success && error && "Error Sending Message"}
+              <p className="text-center text-xl text-error">
+                {!success && error && "✗ Error Sending Message"}
               </p>
             </form>
           </div>
@@ -183,12 +193,12 @@ const Contact = () => {
             <ul className="flex flex-col gap-10">
               {info.map((i, index) => (
                 <li key={index} className="flex items-center gap-6">
-                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-[#27272c] text-accent rounded-md flex items-center justify-center ">
+                  <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-surface-dark text-accent rounded-md flex items-center justify-center ">
                     <div className="text-[28px]">{i.icons}</div>
                   </div>
                   <div className="flex-1">
                     <p className="text-white/60">{i.name}</p>
-                    <h3 className="text-xl">{i.value}</h3>
+                    <h3 className="text-xl text-white">{i.value}</h3>
                   </div>
                 </li>
               ))}

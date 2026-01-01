@@ -11,7 +11,7 @@ const Stats = () => {
       try {
         const res = await fetch("/api/commits");
         const data = await res.json();
-
+        console.log(data, "data");
         setStats((prev) =>
           prev.map((stat) =>
             stat.name === "Code Commits"
@@ -34,19 +34,19 @@ const Stats = () => {
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="flex gap-4 items-center justify-center xl:justify-start flex-1"
+              className="flex gap-4 items-center justify-center xl:justify-start flex-1 bg-surface-dark rounded-xl px-6 py-4"
             >
               <CountUp
                 end={stat.value}
                 duration={5}
                 delay={1}
-                decimals={stat.value % 1 !== 0 ? 1 : 0} // show 1 decimal if value is not integer
-                className="text-4xl xl:text-6xl font-extrabold"
+                decimals={stat.value % 1 !== 0 ? 1 : 0}
+                className="text-4xl xl:text-6xl font-extrabold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent"
               />
               <p
                 className={`${
                   stat.name.length < 15 ? "max-w-[100px]" : "max-w-[150px]"
-                } text-white/80 leading-snug`}
+                } text-white/80 leading-snug text-lg`}
               >
                 {stat.name}
               </p>

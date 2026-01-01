@@ -28,11 +28,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={`${jetbrainsMono.variable} bg-primary text-white`}>
+    <html lang="en" className="h-full">
+      <body
+        className={`${jetbrainsMono.variable} gradient-bg text-white min-h-screen flex flex-col`}
+      >
         <Header />
         <StairTransition />
-        <PageTransition>{children}</PageTransition>
+        <PageTransition>
+          <main className="flex-grow">{children}</main>
+        </PageTransition>
       </body>
     </html>
   );

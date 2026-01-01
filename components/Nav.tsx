@@ -13,7 +13,7 @@ const Nav = () => {
           key={index}
           className={`${
             link.path === pathname && "text-accent border-b-2 border-accent"
-          } transtion-all hover:text-accent`}
+          } transition-all hover:text-accent text-lg`}
         >
           {link.name}
         </Link>

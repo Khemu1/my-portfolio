@@ -55,6 +55,7 @@ export const projects = [
       "https://i.postimg.cc/wMdv0kP7/26.png",
       "https://i.postimg.cc/GtJpNywz/27.png",
     ],
+    live: "https://primeacademy.education",
 
     github: null,
     status: "completed",

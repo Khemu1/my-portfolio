@@ -22,7 +22,7 @@ const Photo = () => {
             transition: { delay: 1.7, duration: 0.4, ease: "easeInOut" },
           }}
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
-                     w-[250px] h-[250px] xl:w-[340px] xl:h-[340px]  overflow-hidden"
+                     w-[250px] h-[250px] xl:w-[340px] xl:h-[340px] overflow-hidden"
         >
           <Image
             src={personal.image}
@@ -33,7 +33,7 @@ const Photo = () => {
           />
         </motion.div>
 
-        {/* SVG Circle - Smaller on xl screens */}
+        {/* SVG Circle - Updated color */}
         <motion.svg
           className="absolute top-0 left-0 w-full h-full"
           fill="transparent"
@@ -44,7 +44,7 @@ const Photo = () => {
             cx="200"
             cy="200"
             r="180"
-            stroke="#00ff99"
+            stroke="#7c3aed" // Updated to new accent color
             strokeWidth="4"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -60,6 +60,17 @@ const Photo = () => {
             }}
           />
         </motion.svg>
+
+        {/* Additional gradient ring */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{
+            scale: 1,
+            opacity: 0.3,
+            transition: { delay: 2, duration: 1, ease: "easeOut" },
+          }}
+          className="absolute inset-0 rounded-full bg-gradient-to-r from-accent/30 to-secondary/30 blur-xl"
+        />
       </motion.div>
     </div>
   );

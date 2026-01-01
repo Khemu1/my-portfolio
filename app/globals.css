@@ -4,27 +4,84 @@
 
 @layer base {
   :root {
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 }
 
 @layer base {
+  html, body {
+    @apply min-h-screen;
+  }
+  
   body {
-    @apply bg-primary text-white;
+    @apply bg-primary-900 text-white;
+    background-image: linear-gradient(135deg, #0a0a0f 0%, #16161e 50%, #1a1b26 100%);
+    background-attachment: fixed;
   }
+  
+  /* Ensure all content sections have proper backgrounds */
+  section, main, div[role="main"] {
+    @apply bg-transparent;
+  }
+  
   .h1 {
-    @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold;
+    @apply text-[48px] xl:text-[80px] leading-[1.1] font-semibold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent;
   }
+  
   .h2 {
     @apply text-[36px] xl:text-[48px] leading-[1.1] font-semibold;
   }
+  
   .h3 {
     @apply text-[20px] xl:text-[24px] leading-[1.1] font-semibold;
   }
+  
   .text-outline {
     -webkit-text-stroke: 1px #ffffff;
   }
+  
   .text-outline-hover {
-    -webkit-text-stroke: 1px #00ff99;
+    -webkit-text-stroke: 1px #7c3aed;
   }
+  
+  /* Modern gradient backgrounds */
+  .gradient-bg {
+    background: linear-gradient(135deg, 
+      #0a0a0f 0%,
+      #16161e 25%,
+      #1a1b26 50%,
+      #24283b 75%,
+      #0a0a0f 100%
+    );
+    min-height: 100vh;
+    background-attachment: fixed;
+  }
+  
+  .card-gradient {
+    @apply bg-gradient-to-br from-surface-dark to-surface-light;
+  }
+  
+  /* Glassmorphism effect */
+  .glass {
+    @apply backdrop-blur-lg bg-white/5 border border-white/10;
+  }
+  
+  /* Shimmer effect */
+  .shimmer {
+    @apply relative overflow-hidden before:absolute before:inset-0 before:-translate-x-full before:animate-[shimmer_2s_infinite] before:bg-gradient-to-r before:from-transparent before:via-white/10 before:to-transparent;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Ensure smooth transitions */
+* {
+  @apply transition-colors duration-200;
 }
