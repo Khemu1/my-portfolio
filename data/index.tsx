@@ -20,7 +20,7 @@ export const stats = [
   { name: "Years of Experience", value: 1 },
   { name: "Free Lancing Projects", value: 3 },
   { name: "Side Projects", value: 62 },
-  { name: "Code Commits", value: 0 },
+  { name: "Code Commits", value: 1800 },
 ];
 
 export const services = [
