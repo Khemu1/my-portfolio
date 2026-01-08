@@ -1,20 +1,13 @@
 "use client";
 
 import { BsArrowDownRight } from "react-icons/bs";
-import { motion } from "framer-motion";
 import { services } from "@/data";
 import Link from "next/link";
 const Services = () => {
   return (
     <section className="flex flex-col justify-center py-12 xl:py-0 min-h-[80vh]">
       <div className="container mx-auto">
-        <div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
-          }}
-        >
+        <div>
           {services.map((service, index) => (
             <div
               key={index}

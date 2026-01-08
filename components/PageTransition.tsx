@@ -10,7 +10,7 @@ const PageTransition: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AnimatePresence>
       <div key={pathname}>
-        <div
+        <motion.div
           initial={{ opacity: 1 }}
           animate={{
             opacity: 0,

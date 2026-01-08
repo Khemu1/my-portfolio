@@ -4,7 +4,7 @@ const Stairs = () => {
   return (
     <>
       {[...Array(6)].map((_, index) => (
-        <div
+        <motion.div
           key={index}
           variants={stairAnimation}
           initial="initial"
@@ -16,7 +16,7 @@ const Stairs = () => {
             delay: 0.1 * reverseIndex(index),
           }}
           className="h-full w-full bg-surface-dark relative"
-        ></div>
+        ></motion.div>
       ))}
     </>
   );
