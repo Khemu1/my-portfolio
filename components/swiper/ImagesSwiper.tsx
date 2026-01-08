@@ -14,7 +14,13 @@ const ImagesSwiper: React.FC<{ images: string[]; title: string }> = ({
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
   useEffect(() => {
-    setCurrentIndex(0); // reset to first image whenever images prop changes
+    setCurrentIndex(0);
+  }, [images]);
+  useEffect(() => {
+    images.forEach((src) => {
+      const img = new window.Image();
+      img.src = src;
+    });
   }, [images]);
   const goNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
@@ -29,6 +35,7 @@ const ImagesSwiper: React.FC<{ images: string[]; title: string }> = ({
           <Image
             src={images[currentIndex]}
             alt={`Project image ${currentIndex + 1}`}
+            priority={currentIndex === 0}
             fill
             className="object-contain rounded-md shadow-lg"
             quality={90}
