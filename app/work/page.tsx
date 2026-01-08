@@ -119,7 +119,7 @@ const Work = () => {
                       {/* Album button */}
                       <Dialog>
                         <DialogTrigger asChild>
-                          <button className="absolute m-2 bottom-2 right-2 w-[70px] h-[70px] rounded-full bg-surface-dark flex justify-center items-center glass hover:bg-surface-light transition-all">
+                          <button className="absolute m-2 bottom-2 right-left w-[70px] h-[70px] rounded-full bg-surface-dark flex justify-center items-center glass hover:bg-surface-light transition-all">
                             <BsImages className="text-white text-3xl hover:text-accent hover:scale-110 transition-all duration-300" />
                           </button>
                         </DialogTrigger>
