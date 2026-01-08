@@ -125,11 +125,12 @@ const Work = () => {
                         </DialogTrigger>
                         <DialogContent className="bg-surface-dark border-accent/30">
                           <DialogTitle className="text-accent font-semibold text-xl mb-4">
-                            {activeProject.title} - Gallery
+                            {project.title} - Gallery
                           </DialogTitle>
+                          {/* Pass the images of THIS project directly */}
                           <ImagesSwiper
-                            images={activeProject.album}
-                            title={activeProject.title}
+                            images={project.album}
+                            title={project.title}
                           />
                         </DialogContent>
                       </Dialog>

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ScrollArea } from "../ui/scroll-area";
 import { Button } from "../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -13,7 +13,9 @@ const ImagesSwiper: React.FC<{ images: string[]; title: string }> = ({
   const goPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   };
-
+  useEffect(() => {
+    setCurrentIndex(0); // reset to first image whenever images prop changes
+  }, [images]);
   const goNext = () => {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   };
