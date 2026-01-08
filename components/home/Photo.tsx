@@ -6,21 +6,8 @@ import { personal } from "@/data";
 const Photo = () => {
   return (
     <div className="relative w-full h-full flex justify-center items-center">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: 1,
-          transition: { delay: 1.3, duration: 0.4, ease: "easeIn" },
-        }}
-        className="relative w-[300px] h-[300px] xl:w-[400px] xl:h-[400px]"
-      >
-        {/* Image positioned inside the circle */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            transition: { delay: 1.7, duration: 0.4, ease: "easeInOut" },
-          }}
+      <div className="relative w-[300px] h-[300px] xl:w-[400px] xl:h-[400px]">
+        <div
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
                      w-[250px] h-[250px] xl:w-[340px] xl:h-[340px] overflow-hidden"
         >
@@ -31,7 +18,7 @@ const Photo = () => {
             quality={100}
             fill
           />
-        </motion.div>
+        </div>
 
         {/* SVG Circle - Updated color */}
         <motion.svg
@@ -71,7 +58,7 @@ const Photo = () => {
           }}
           className="absolute inset-0 rounded-full bg-gradient-to-r from-accent/30 to-secondary/30 blur-xl"
         />
-      </motion.div>
+      </div>
     </div>
   );
 };

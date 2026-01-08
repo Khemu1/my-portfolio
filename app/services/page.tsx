@@ -8,7 +8,7 @@ const Services = () => {
   return (
     <section className="flex flex-col justify-center py-12 xl:py-0 min-h-[80vh]">
       <div className="container mx-auto">
-        <motion.div
+        <div
           initial={{ opacity: 0 }}
           animate={{
             opacity: 1,
@@ -38,7 +38,7 @@ const Services = () => {
               <div className="border-b border-accent/30 w-full"></div>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

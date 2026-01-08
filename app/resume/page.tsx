@@ -39,6 +39,7 @@ const ResumeItem = ({
     </div>
     {name && (
       <div className="flex items-center gap-3">
+        dd
         <span className="w-[6px] h-[6px] rounded-full bg-accent" />
         <p className="text-white/60">{name}</p>
       </div>
@@ -90,14 +91,7 @@ const EducationItem = ({
 
 const Resume = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
-      }}
-      className=" flex items-center justify-center py-12 xl:py-0"
-    >
+    <div className=" flex items-center justify-center py-12 xl:py-0 ">
       <div className="container mx-auto">
         <Tabs
           defaultValue="experince"
@@ -133,7 +127,7 @@ const Resume = () => {
             <TabsContent value="experince">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
                 <SectionTitle title={experince.title} />
-                <ScrollArea className="h-[400px]">
+                <ScrollArea className="h-full">
                   <ul className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     {experince.items.map((item, index) => (
                       <ResumeItem
@@ -151,7 +145,7 @@ const Resume = () => {
             <TabsContent value="education">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
                 <SectionTitle title={education.title} />
-                <ScrollArea className="h-[400px]">
+                <ScrollArea className="h-full">
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-[30px]">
                     {education.items.map((item, index) => (
                       <EducationItem
@@ -172,7 +166,7 @@ const Resume = () => {
             <TabsContent value="categorizedSkills">
               <div className="flex flex-col gap-[30px] text-center xl:text-left">
                 <SectionTitle title="My Skills" />
-                <ScrollArea className="h-[400px]">
+                <ScrollArea className="h-full">
                   <div className="space-y-10 mt-4">
                     {Object.entries(categorizedSkills).map(
                       ([category, items], index) => (
@@ -230,7 +224,7 @@ const Resume = () => {
           </div>
         </Tabs>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

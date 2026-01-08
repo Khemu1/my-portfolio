@@ -33,10 +33,10 @@ export default function RootLayout({
         className={`${jetbrainsMono.variable} gradient-bg text-white min-h-screen flex flex-col`}
       >
         <Header />
-        <StairTransition />
+        {/* <StairTransition />
         <PageTransition>
+        </PageTransition> */}
           <main className="flex-grow">{children}</main>
-        </PageTransition>
       </body>
     </html>
   );

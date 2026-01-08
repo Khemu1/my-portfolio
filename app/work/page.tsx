@@ -22,21 +22,14 @@ const Work = () => {
   const [activeProject, setActiveProject] = useState(projects[0]);
 
   const handleSlideChange = (swiper: SwiperType) => {
-    const currentIndex = swiper.activeIndex;
-    setActiveProject(projects[currentIndex]);
+    setActiveProject(projects[swiper.activeIndex]);
   };
 
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{
-        opacity: 1,
-        transition: { delay: 2.4, duration: 0.4, ease: "easeIn" },
-      }}
-      className="flex flex-col justify-center py-12 xl:px-0"
-    >
+    <div className="flex flex-col justify-center py-12 xl:px-0">
       <div className="container mx-auto">
         <div className="flex flex-col xl:flex-row xl:gap-[30px]">
+          {/* Left info */}
           <div className="flex flex-col xl:justify-between order-2 xl:order-none w-full xl:w-[50%] xl:h-[460px]">
             <div className="flex flex-col gap-[30px] h-[50%]">
               <div className="text-8xl leading-none font-extrabold text-transparent text-outline">
@@ -75,11 +68,7 @@ const Work = () => {
               <div className="border border-accent/30"></div>
               <div className="flex items-center gap-4">
                 {activeProject.live && (
-                  <Link
-                    href={activeProject.live}
-                    target="_blank"
-                    className="mb-4"
-                  >
+                  <Link href={activeProject.live} target="_blank">
                     <TooltipProvider delayDuration={100}>
                       <Tooltip>
                         <TooltipTrigger className="w-[70px] h-[70px] rounded-full bg-surface-dark flex justify-center items-center group glass hover:bg-surface-light">
@@ -110,7 +99,6 @@ const Work = () => {
             </div>
           </div>
 
-          {/* Right image side */}
           <div className="w-full xl:w-[50%] relative">
             <Swiper
               spaceBetween={30}
@@ -120,53 +108,46 @@ const Work = () => {
             >
               {projects.map((project, index) => (
                 <SwiperSlide key={index} className="w-full">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <div className="relative group">
-                        <div
-                          className="h-[460px] relative flex justify-center items-center cursor-pointer"
-                          onClick={() => setActiveProject(project)}
-                        >
-                          <div className="relative w-full h-full rounded-xl overflow-hidden glass">
-                            <Image
-                              loading="lazy"
-                              src={project.mainImage}
-                              alt="project"
-                              fill
-                              className="object-contain"
-                            />
-                          </div>
-
-                          {/* album indicator */}
-                          <div className="absolute bottom-4 left-4 flex items-center gap-2 bg-surface-dark/90 px-3 py-1.5 rounded-full glass">
-                            <BsImages className="text-accent" />
-                            <span className="text-white text-sm">
-                              {project.album.length} images
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </DialogTrigger>
-                    <DialogContent className="bg-surface-dark border-accent/30">
-                      <DialogTitle className="text-accent font-semibold text-xl mb-4"></DialogTitle>
-                      <ImagesSwiper
-                        images={project.album}
-                        title={`${activeProject.title} - Gallery`}
+                  <div className="relative flex justify-center items-center h-[460px]">
+                    <div className="relative w-full h-full rounded-xl overflow-hidden glass">
+                      <Image
+                        loading="lazy"
+                        src={project.mainImage}
+                        alt="project"
+                        fill
+                        className="object-contain"
                       />
-                    </DialogContent>
-                  </Dialog>
+                      {/* Album button */}
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <button className="absolute m-2 bottom-2 right-2 w-[70px] h-[70px] rounded-full bg-surface-dark flex justify-center items-center glass hover:bg-surface-light transition-all">
+                            <BsImages className="text-white text-3xl hover:text-accent hover:scale-110 transition-all duration-300" />
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="bg-surface-dark border-accent/30">
+                          <DialogTitle className="text-accent font-semibold text-xl mb-4">
+                            {activeProject.title} - Gallery
+                          </DialogTitle>
+                          <ImagesSwiper
+                            images={activeProject.album}
+                            title={activeProject.title}
+                          />
+                        </DialogContent>
+                      </Dialog>
+                    </div>
+                  </div>
                 </SwiperSlide>
               ))}
 
               <SliderButtons
-                continerStyle="flex w-max justify-none gap-2 absolute right-0 bottom-0 z-20 w-full"
+                continerStyle="flex w-max justify-none gap-2 absolute right-2 bottom-1 z-20 w-full"
                 btnStyle="flex justify-center items-center transition-all bg-accent hover:bg-accent-hover text-white text-[22px] w-[44px] h-[44px] rounded-sm hover:scale-110"
               />
             </Swiper>
           </div>
         </div>
       </div>
-    </motion.section>
+    </div>
   );
 };
 

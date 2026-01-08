@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import CountUp from "react-countup";
 import { stats as baseStats } from "@/data";
 import { Loader2 } from "lucide-react";
 
@@ -37,24 +36,20 @@ const Stats = () => {
         <div className="flex flex-wrap gap-6 max-w-[80vw] mx-auto xl:max-w-none">
           {stats.map((stat, index) => {
             const isCommits = stat.name === "Code Commits";
+
             return (
               <div
                 key={index}
                 className="flex gap-4 items-center justify-center xl:justify-between flex-1 bg-surface-dark rounded-xl px-6 py-4"
               >
                 {isCommits && loadingCommits ? (
-                  <span className="text-4xl xl:text-6xl font-extrabold  animate-spin">
-                    <Loader2 className="" />
-                  </span>
+                  <Loader2 className="w-10 h-10 xl:w-14 xl:h-14 animate-spin text-accent" />
                 ) : (
-                  <CountUp
-                    end={stat.value}
-                    duration={5}
-                    delay={1}
-                    decimals={stat.value % 1 !== 0 ? 1 : 0}
-                    className="text-4xl xl:text-6xl font-extrabold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent"
-                  />
+                  <span className="text-4xl xl:text-6xl font-extrabold bg-gradient-to-r from-accent to-secondary bg-clip-text text-transparent">
+                    {stat.value}
+                  </span>
                 )}
+
                 <p
                   className={`${
                     stat.name.length < 15 ? "max-w-[100px]" : "max-w-[150px]"
