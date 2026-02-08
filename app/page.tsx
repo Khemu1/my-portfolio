@@ -114,7 +114,7 @@ export default function Home() {
 
             {/* Download CV Button */}
             <motion.a
-              href="/Ali-Hassan-CV.pdf"
+              href="/cv/Fullstack_CV.pdf"
               download
               className="group relative flex items-center gap-3 px-7 py-3.5 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 overflow-hidden"
               whileHover={{ scale: 1.03, y: -1 }}
