@@ -15,7 +15,8 @@ const ContactCard = ({ icon, label, link }: ContactCardProps) => {
       className="
         relative
         rounded-2xl
-        p-2
+        px-2
+        py-4
         border border-white/5
         backdrop-blur-lg
         bg-white/5
