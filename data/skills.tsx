@@ -9,6 +9,7 @@ import {
   FaLock,
   FaAws,
   FaGithub,
+  FaNutritionix,
 } from "react-icons/fa";
 
 import {
@@ -36,7 +37,7 @@ import {
   SiRedis,
 } from "react-icons/si";
 import { RiSupabaseFill } from "react-icons/ri";
-
+import { TbBrandNuxt } from "react-icons/tb";
 import { BiLogoTypescript } from "react-icons/bi";
 
 export const categorizedSkills = {
@@ -50,6 +51,7 @@ export const categorizedSkills = {
     { icon: <FaReact />, name: "React", color: "sky" },
     { icon: <SiNextdotjs />, name: "Next.js", color: "slate" },
     { icon: <FaVuejs />, name: "Vue", color: "green" },
+    { icon: <TbBrandNuxt />, name: "Nuxt", color: "nuxt" },
     { icon: <SiRedux />, name: "Redux", color: "violet" },
     { icon: <SiReactquery />, name: "React Query", color: "rose" },
   ],
@@ -64,7 +66,7 @@ export const categorizedSkills = {
     { icon: <SiPrisma />, name: "Prisma", color: "indigo" },
     { icon: <SiTypeorm />, name: "TypeORM", color: "orange" },
     { icon: <SiSequelize />, name: "Sequelize", color: "teal" },
-    { icon: <SiRedis />, name: "Redis", color: "red" }, 
+    { icon: <SiRedis />, name: "Redis", color: "red" },
   ],
 
   database: [
@@ -92,4 +94,3 @@ export const categorizedSkills = {
 
   testing: [{ icon: <SiJest />, name: "Jest", color: "red" }],
 };
-

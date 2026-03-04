@@ -84,7 +84,7 @@ const Projects = () => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
         >
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {projects.map((project, idx) => {
               const active = selectedProject.id === project.id;
               const projectStatus = normalizeStatus(project.status);

@@ -143,7 +143,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.05, margin: "0px 0px -50px 0px" }}
             transition={{ duration: 0.6 }}
           >
             <Technologies />
@@ -152,7 +152,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.05, margin: "0px 0px -50px 0px" }}
             transition={{ duration: 0.6 }}
           >
             <Projects />
@@ -161,7 +161,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.05, margin: "0px 0px -50px 0px" }}
             transition={{ duration: 0.6 }}
           >
             <Connect />

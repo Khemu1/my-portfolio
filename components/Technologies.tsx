@@ -1,6 +1,6 @@
 "use client";
 
-import { categorizedSkills } from "@/data/skills"; // adjust path
+import { categorizedSkills } from "@/data/skills";
 import { motion, Variants } from "framer-motion";
 
 const skillColors: Record<string, string> = {
@@ -22,13 +22,13 @@ const skillColors: Record<string, string> = {
   red: "bg-red-500/10 border-red-400/30 text-red-300",
   slate: "bg-slate-500/10 border-slate-400/30 text-slate-300",
   dark: "bg-black/30 border-white/20 text-neutral-300",
+  nuxt: "bg-[#00DC82]/10 border-[#00DC82]/20 text-[#4ADE80]",
 };
 
 const fadeIn: Variants = {
-  hidden: { opacity: 0, y: 20 },
+  hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    y: 0,
     transition: {
       duration: 0.5,
       ease: "easeOut",
@@ -40,10 +40,7 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
-    },
+    ease: "easeOut",
   },
 };
 
@@ -52,9 +49,9 @@ const Technologies = () => {
     <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
       <motion.div
         className="mb-10"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.05, margin: "0px 0px -50px 0px" }}
         transition={{ duration: 0.6 }}
       >
         <div className="w-fit">
@@ -68,7 +65,6 @@ const Technologies = () => {
           >
             TECHNOLOGIES
           </h2>
-
           <div className="mt-4 h-0.5 w-full bg-linear-to-r from-white/80 to-transparent" />
         </div>
       </motion.div>
@@ -79,19 +75,17 @@ const Technologies = () => {
           ([category, skills], categoryIndex) => (
             <motion.div
               key={category}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.5, delay: categoryIndex * 0.1 }}
+              variants={containerVariants}
+              whileInView="visible"
+              viewport={{
+                once: true,
+                amount: 0.05,
+                margin: "0px 0px -50px 0px",
+              }}
+              transition={{ delay: categoryIndex * 0.1 }}
             >
-              <motion.div
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-              >
-                {skills.map((skill, i) => {
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+                {skills.map((skill) => {
                   const colorClasses =
                     skillColors[skill.color] ??
                     "bg-white/5 border-white/10 text-white";
@@ -100,32 +94,28 @@ const Technologies = () => {
                     <motion.div
                       key={skill.name}
                       className={`group flex flex-col items-center justify-center gap-3
-                    rounded-xl border p-6 backdrop-blur-sm transition-all
-                    hover:scale-[1.04] hover:shadow-lg cursor-pointer
-                    ${colorClasses}`}
+                        rounded-xl border p-6 backdrop-blur-sm transition-all
+                        hover:scale-[1.04] hover:shadow-lg cursor-pointer
+                        ${colorClasses}`}
                       variants={fadeIn}
                       whileHover={{
-                        scale: 1.05,
-                        y: -5,
                         transition: { duration: 0.2 },
                       }}
-                      whileTap={{ scale: 0.95 }}
                     >
                       <motion.div
                         className="text-4xl transition-transform duration-300 group-hover:scale-110"
-                        whileHover={{ rotate: 360 }}
-                        transition={{ duration: 0.6, ease: "easeInOut" }}
+                        whileHover={{ rotate: 15 }}
+                        transition={{ duration: 0.1, ease: "easeInOut" }}
                       >
                         {skill.icon}
                       </motion.div>
-
                       <span className="text-sm font-medium tracking-wide">
                         {skill.name}
                       </span>
                     </motion.div>
                   );
                 })}
-              </motion.div>
+              </div>
             </motion.div>
           ),
         )}
