@@ -8,9 +8,7 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "Portfolio | Modern Web Developer",
-  description:
-    "A modern portfolio website built with Next.js, TypeScript and Tailwind CSS",
+  title: "Portfolio | Ali Hassan",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
