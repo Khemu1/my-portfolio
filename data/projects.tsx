@@ -84,7 +84,6 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       "https://i.imgur.com/8Z0G9wX.png",
       "https://i.imgur.com/O3RRMVa.png",
       "https://i.imgur.com/l040LOg.png",
-      "https://i.imgur.com/7CersQ4.png",
       "https://i.imgur.com/rOUShR0.png",
       "https://i.imgur.com/4Rz1sS7.png",
       "https://i.imgur.com/o6MHDC3.png",
