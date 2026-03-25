@@ -2,13 +2,17 @@
 
 import { useState, useCallback, useMemo } from "react";
 import useEmblaCarousel from "embla-carousel-react";
-import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+import {
+  IoChevronBack,
+  IoChevronForward,
+  IoOpenOutline,
+} from "react-icons/io5";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
 
-/* ---------------- helpers (SAFE) ---------------- */
+/* ---------------- helpers ---------------- */
 
 const normalizeStatus = (status?: unknown) =>
   status === "completed" ? "completed" : "in-progress";
@@ -23,7 +27,96 @@ const getImages = (project: (typeof projects)[0]) =>
       ? [project.mainImage]
       : [];
 
-/* ---------------- component ---------------- */
+/* ---------------- Video Section Component ---------------- */
+
+/* ---------------- Video Section Component ---------------- */
+
+const VideoSection = ({
+  videos,
+  title,
+}: {
+  videos: string[];
+  title: string;
+}) => {
+  const [failedThumbnails, setFailedThumbnails] = useState<Set<string>>(
+    new Set(),
+  );
+
+  if (!videos?.length) return null;
+
+  return (
+    <div className="mb-6">
+      <div className="flex items-center justify-between mb-3">
+        <h4 className="text-sm uppercase tracking-wide text-white/60">
+          Videos ({videos.length})
+        </h4>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {videos.map((video, i) => {
+          const videoId = getYouTubeId(video);
+          const thumbnailUrl = failedThumbnails.has(videoId)
+            ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+            : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+          return (
+            <motion.a
+              key={i}
+              href={video}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group relative block w-full aspect-video rounded-xl overflow-hidden cursor-pointer bg-black/40 hover:bg-black/30 transition"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <Image
+                src={thumbnailUrl}
+                alt={`${title} - Video ${i + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover"
+                onError={() => {
+                  setFailedThumbnails((prev) => new Set(prev).add(videoId));
+                }}
+                priority={i < 2}
+              />
+
+              {/* Play overlay */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition flex items-center justify-center">
+                <div className="p-3 rounded-full bg-white/20 backdrop-blur-md group-hover:scale-110 transition">
+                  <IoOpenOutline size={24} className="text-white" />
+                </div>
+              </div>
+
+              {/* Video number indicator */}
+              <div className="absolute bottom-2 right-2 px-2 py-1 rounded-md bg-black/60 backdrop-blur-sm text-xs text-white">
+                Video {i + 1}
+              </div>
+            </motion.a>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+// Helper to extract YouTube ID from various URL formats
+const getYouTubeId = (url: string) => {
+  const patterns = [
+    /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&?]+)/,
+    /youtube\.com\/embed\/([^?]+)/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = url.match(pattern);
+    if (match) return match[1];
+  }
+
+  return url; // Return original if no match
+};
+
+/* ---------------- Main Component ---------------- */
 
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(projects[0]);
@@ -61,22 +154,15 @@ const Projects = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="w-fit">
-          <h2
-            className="
-            text-4xl sm:text-7xl
-            font-extrabold tracking-tighter
-            text-neutral-300
-            whitespace-nowrap
-            "
-          >
+          <h2 className="text-4xl sm:text-7xl font-extrabold tracking-tighter text-neutral-300 whitespace-nowrap">
             PROJECTS
           </h2>
-
           <div className="mt-4 h-0.5 w-full bg-linear-to-r from-white/80 to-transparent" />
         </div>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Project list */}
         <motion.aside
           className="lg:col-span-4 order-2 lg:order-1 space-y-3 max-h-150 overflow-y-auto custom-scrollbar px-4 py-1"
           initial={{ opacity: 0, x: -20 }}
@@ -88,24 +174,21 @@ const Projects = () => {
             {projects.map((project, idx) => {
               const active = selectedProject.id === project.id;
               const projectStatus = normalizeStatus(project.status);
-
               return (
                 <motion.div
                   key={project.id + "-" + idx}
                   onClick={() => setSelectedProject(project)}
                   className={`
-                  relative p-4 rounded-xl cursor-pointer
-                  transition-all duration-300
-                  backdrop-blur-xl
-                  bg-white/5
-                  border border-white/10
-                  ${
-                    active
-                      ? "ring-1 ring-purple-400/40"
-                      : "hover:bg-white/15 hover:border-white/30"
-                  }
-                  hover:-translate-y-0.5
-                `}
+                    relative p-4 rounded-xl cursor-pointer
+                    transition-all duration-300
+                    backdrop-blur-xl bg-white/5 border border-white/10
+                    ${
+                      active
+                        ? "ring-1 ring-purple-400/40"
+                        : "hover:bg-white/15 hover:border-white/30"
+                    }
+                    hover:-translate-y-0.5
+                  `}
                   variants={projectCardVariants}
                   initial="hidden"
                   animate="visible"
@@ -125,16 +208,13 @@ const Projects = () => {
                       <h3 className="text-base font-semibold text-white truncate">
                         {project.title}
                       </h3>
-
                       <p className="text-sm text-white/70 mt-1 leading-snug line-clamp-2">
                         {clamp(project.description)}
                       </p>
-
                       <span className="mt-2 inline-block text-xs uppercase tracking-wide text-white/50">
                         {project.category}
                       </span>
                     </div>
-
                     <span
                       className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${
                         projectStatus === "completed"
@@ -149,96 +229,83 @@ const Projects = () => {
           </AnimatePresence>
         </motion.aside>
 
+        {/* Project details */}
         <motion.div
           className="
-          lg:col-span-8
-          order-1 lg:order-2
-          rounded-2xl p-6
-          backdrop-blur-2xl
-          bg-white/5
-          border border-white/10
-          ring-1 ring-white/5
-        "
+            lg:col-span-8 order-1 lg:order-2
+            rounded-2xl p-6 backdrop-blur-2xl bg-white/5 border border-white/10 ring-1 ring-white/5
+          "
           variants={mainContentVariants}
           initial="hidden"
           animate="visible"
           key={selectedProject.id}
           transition={{ duration: 0.5 }}
         >
+          {selectedProject?.videos && selectedProject?.videos.length > 0 && (
+            <VideoSection
+              videos={selectedProject.videos}
+              title={selectedProject.title}
+            />
+          )}
+
           {/* Image carousel */}
-          <motion.div
-            className="relative mb-6 group"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1 }}
-          >
-            <div ref={emblaRef} className="overflow-hidden rounded-xl">
-              <div className="flex">
-                {images.map((img, i) => (
-                  <motion.div
-                    key={i}
-                    className="flex-[0_0_100%]"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                  >
-                    <Image
-                      src={img}
-                      alt={`${selectedProject.title} ${i + 1}`}
-                      width={1600}
-                      height={900}
-                      quality={75}
-                      priority={i === 0}
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                      className="w-full h-full object-fit"
-                    />
-                  </motion.div>
-                ))}
+          {images.length > 0 && (
+            <motion.div
+              className="relative mb-6 group"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1 }}
+            >
+              <div ref={emblaRef} className="overflow-hidden rounded-xl">
+                <div className="flex">
+                  {images.map((img, i) => (
+                    <motion.div
+                      key={i}
+                      className="flex-[0_0_100%]"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: i * 0.1 }}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${selectedProject.title} ${i + 1}`}
+                        width={1600}
+                        height={900}
+                        quality={75}
+                        priority={i === 0}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                        className="w-full h-full object-fit"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            {images.length > 1 && (
-              <>
-                <motion.button
-                  onClick={scrollPrev}
-                  className="
-                  absolute left-4 top-1/2 -translate-y-1/2
-                  p-2 rounded-full
-                  backdrop-blur-md
-                  bg-white/20
-                  border border-white/30
-                  text-white
-                  opacity-0 group-hover:opacity-100
-                  transition
-                "
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <IoChevronBack size={22} />
-                </motion.button>
+              {images.length > 1 && (
+                <>
+                  <motion.button
+                    onClick={scrollPrev}
+                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <IoChevronBack size={22} />
+                  </motion.button>
 
-                <motion.button
-                  onClick={scrollNext}
-                  className="
-                  absolute right-4 top-1/2 -translate-y-1/2
-                  p-2 rounded-full
-                  backdrop-blur-md
-                  bg-white/20
-                  border border-white/30
-                  text-white
-                  opacity-0 group-hover:opacity-100
-                  transition
-                "
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <IoChevronForward size={22} />
-                </motion.button>
-              </>
-            )}
-          </motion.div>
+                  <motion.button
+                    onClick={scrollNext}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <IoChevronForward size={22} />
+                  </motion.button>
+                </>
+              )}
+            </motion.div>
+          )}
 
-          {/* Info */}
+          {/* Info, actions, tech stack */}
           <div className="space-y-4">
             <motion.div
               className="flex items-start justify-between gap-4"
@@ -275,7 +342,7 @@ const Projects = () => {
 
             {/* Actions */}
             <motion.div
-              className="flex gap-3 pt-2"
+              className="flex gap-3 pt-2 flex-wrap"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
@@ -285,21 +352,11 @@ const Projects = () => {
                   href={selectedProject.live}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
-                  flex items-center gap-2 px-6 py-3
-                  rounded-lg font-semibold
-                  backdrop-blur-md
-                  bg-white/20
-                  border border-white/30
-                  text-white
-                  hover:bg-white/30
-                  transition
-                "
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg font-semibold backdrop-blur-md bg-white/20 border border-white/30 text-white hover:bg-white/30 transition"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FiExternalLink />
-                  Live
+                  <FiExternalLink /> Live
                 </motion.a>
               )}
 
@@ -308,21 +365,11 @@ const Projects = () => {
                   href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="
-                  flex items-center gap-2 px-6 py-3
-                  rounded-lg
-                  backdrop-blur-md
-                  bg-white/5
-                  border border-white/10
-                  text-white
-                  hover:bg-white/20
-                  transition
-                "
+                  className="flex items-center gap-2 px-6 py-3 rounded-lg backdrop-blur-md bg-white/5 border border-white/10 text-white hover:bg-white/20 transition"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FiGithub />
-                  GitHub
+                  <FiGithub /> GitHub
                 </motion.a>
               )}
 
@@ -346,19 +393,11 @@ const Projects = () => {
               <h4 className="text-sm uppercase tracking-wide text-white/60 mb-3">
                 Tech Stack
               </h4>
-
               <div className="flex flex-wrap gap-2">
                 {selectedProject.stack.slice(0, 8).map((tech, i) => (
                   <motion.span
                     key={i}
-                    className="
-                    px-3 py-1.5 text-sm
-                    backdrop-blur-sm
-                    bg-white/5
-                    text-white
-                    rounded-lg
-                    border border-white/10
-                  "
+                    className="px-3 py-1.5 text-sm backdrop-blur-sm bg-white/5 text-white rounded-lg border border-white/10"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.6 + i * 0.05 }}
@@ -367,7 +406,6 @@ const Projects = () => {
                     {tech.name}
                   </motion.span>
                 ))}
-
                 {selectedProject.stack.length > 8 && (
                   <motion.span
                     className="px-3 py-1.5 text-sm text-white/60"

@@ -18,6 +18,12 @@ const nextConfig: NextConfig = {
         hostname: "github-readme-stats-seven-pi-75.vercel.app",
         pathname: "**",
       },
+      // Add YouTube thumbnails
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+        pathname: "**",
+      },
     ],
   },
 };
