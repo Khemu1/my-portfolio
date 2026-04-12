@@ -107,7 +107,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     ],
     videos: [],
     live: null,
-    github: null,
+    github: "https://github.com/Khemu1/IK",
     status: "cancelled",
   },
   {
