@@ -11,6 +11,7 @@ import { FiExternalLink, FiGithub } from "react-icons/fi";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 /* ---------------- helpers ---------------- */
 
@@ -26,8 +27,6 @@ const getImages = (project: (typeof projects)[0]) =>
     : project.mainImage
       ? [project.mainImage]
       : [];
-
-/* ---------------- Video Section Component ---------------- */
 
 /* ---------------- Video Section Component ---------------- */
 
@@ -113,7 +112,7 @@ const getYouTubeId = (url: string) => {
     if (match) return match[1];
   }
 
-  return url; // Return original if no match
+  return url;
 };
 
 /* ---------------- Main Component ---------------- */
@@ -121,6 +120,7 @@ const getYouTubeId = (url: string) => {
 const Projects = () => {
   const [selectedProject, setSelectedProject] = useState(projects[0]);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
   const images = useMemo(() => getImages(selectedProject), [selectedProject]);
 
@@ -177,7 +177,11 @@ const Projects = () => {
               return (
                 <motion.div
                   key={project.id + "-" + idx}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => {
+                    setSelectedProject(project);
+                    setGalleryOpen(false);
+                    emblaApi?.scrollTo(0);
+                  }}
                   className={`
                     relative p-4 rounded-xl cursor-pointer
                     transition-all duration-300
@@ -215,13 +219,6 @@ const Projects = () => {
                         {project.category}
                       </span>
                     </div>
-                    <span
-                      className={`mt-1 w-2.5 h-2.5 rounded-full shrink-0 ${
-                        projectStatus === "completed"
-                          ? "bg-green-400"
-                          : "bg-yellow-400 animate-pulse"
-                      }`}
-                    />
                   </div>
                 </motion.div>
               );
@@ -248,62 +245,93 @@ const Projects = () => {
             />
           )}
 
-          {/* Image carousel */}
-          {images.length > 0 && (
+          {selectedProject.mainImage && (
             <motion.div
-              className="relative mb-6 group"
+              className="relative mb-6 rounded-xl overflow-hidden"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.1 }}
             >
-              <div ref={emblaRef} className="overflow-hidden rounded-xl">
-                <div className="flex">
-                  {images.map((img, i) => (
-                    <motion.div
-                      key={i}
-                      className="flex-[0_0_100%]"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: i * 0.1 }}
-                    >
-                      <Image
-                        src={img}
-                        alt={`${selectedProject.title} ${i + 1}`}
-                        width={1600}
-                        height={900}
-                        quality={75}
-                        priority={i === 0}
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                        className="w-full h-full object-fit"
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+              <Image
+                src={selectedProject.mainImage}
+                alt={selectedProject.title}
+                width={1600}
+                height={900}
+                quality={75}
+                priority
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                className="w-full object-cover rounded-xl"
+              />
 
+              {/* Gallery button overlay */}
               {images.length > 1 && (
-                <>
-                  <motion.button
-                    onClick={scrollPrev}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <IoChevronBack size={22} />
-                  </motion.button>
-
-                  <motion.button
-                    onClick={scrollNext}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    <IoChevronForward size={22} />
-                  </motion.button>
-                </>
+                <motion.button
+                  onClick={() => setGalleryOpen(true)}
+                  className="absolute bottom-3 right-3 flex items-center gap-2 px-4 py-2 rounded-lg backdrop-blur-md bg-black/50 border border-white/20 text-white text-sm hover:bg-black/70 transition"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <IoOpenOutline size={16} />
+                  View Gallery ({images.length})
+                </motion.button>
               )}
             </motion.div>
           )}
+
+          {/* Gallery Dialog */}
+          <Dialog open={galleryOpen} onOpenChange={setGalleryOpen}>
+            <DialogContent className="!max-w-5xl w-[90vw] bg-black/90 border border-white/10 p-4 max-h-[90vh] overflow-y-auto">
+              <DialogTitle className="text-white text-lg font-semibold mb-4">
+                {selectedProject.title} — Gallery
+              </DialogTitle>
+
+              <div className="relative group">
+                <div ref={emblaRef} className="overflow-hidden rounded-xl">
+                  <div className="flex">
+                    {images.map((img, i) => (
+                      <div
+                        key={i}
+                        className="flex-[0_0_100%] flex items-center justify-center max-h-[70vh]"
+                      >
+                        <Image
+                          src={img}
+                          alt={`${selectedProject.title} ${i + 1}`}
+                          width={1600}
+                          height={900}
+                          quality={75}
+                          priority={i === 0}
+                          sizes="90vw"
+                          className="w-full h-full object-contain"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {images.length > 1 && (
+                  <>
+                    <motion.button
+                      onClick={scrollPrev}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <IoChevronBack size={22} />
+                    </motion.button>
+
+                    <motion.button
+                      onClick={scrollNext}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <IoChevronForward size={22} />
+                    </motion.button>
+                  </>
+                )}
+              </div>
+            </DialogContent>
+          </Dialog>
 
           {/* Info, actions, tech stack */}
           <div className="space-y-4">
@@ -316,19 +344,6 @@ const Projects = () => {
               <h3 className="text-3xl font-bold text-white">
                 {selectedProject.title}
               </h3>
-
-              <motion.span
-                className={`px-3 py-1 text-xs rounded-full border ${
-                  status === "completed"
-                    ? "bg-green-400/20 text-green-300 border-green-400/30"
-                    : "bg-yellow-400/20 text-yellow-300 border-yellow-400/30"
-                }`}
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", stiffness: 200, delay: 0.3 }}
-              >
-                {status === "completed" ? "Completed" : "In Progress"}
-              </motion.span>
             </motion.div>
 
             <motion.p
