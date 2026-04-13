@@ -8,7 +8,7 @@ const Connect = () => {
     {
       icon: <HiOutlineMail className="w-10 h-10" />,
       label: "Email",
-      link: "mailto:mohamedahmedelsaadi@gmail.com",
+      link: "mailto:alghost2004@gmail.com",
     },
     {
       icon: <FiLinkedin className="w-10 h-10" />,
