@@ -1,7 +1,9 @@
 "use client";
 
 import { categorizedSkills } from "@/data/skills";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+type Category = keyof typeof categorizedSkills;
 
 const skillColors: Record<string, string> = {
   sky: "bg-sky-500/10 border-sky-400/30 text-sky-300",
@@ -26,27 +28,37 @@ const skillColors: Record<string, string> = {
 };
 
 const fadeIn: Variants = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 0, y: 8 },
   visible: {
     opacity: 1,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
+    y: 0,
+    transition: { duration: 0.35, ease: "easeOut" },
   },
 };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
+const contentVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
-    ease: "easeOut",
+    y: 0,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    transition: { duration: 0.15, ease: "easeIn" },
   },
 };
 
 const Technologies = () => {
+  const categories = Object.keys(categorizedSkills) as Category[];
+  const [activeTab, setActiveTab] = useState(categories[0]);
+
+  const activeSkills = categorizedSkills[activeTab] ?? [];
+
   return (
     <section className="relative z-10 max-w-6xl mx-auto px-6 py-24">
+      {/* Heading */}
       <motion.div
         className="mb-10"
         initial={{ opacity: 0 }}
@@ -55,71 +67,90 @@ const Technologies = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="w-fit">
-          <h2
-            className="
-            text-4xl sm:text-7xl
-            font-extrabold tracking-tighter
-            text-neutral-300
-            whitespace-nowrap
-            "
-          >
+          <h2 className="text-4xl sm:text-7xl font-extrabold tracking-tighter text-neutral-300 whitespace-nowrap">
             TECHNOLOGIES
           </h2>
           <div className="mt-4 h-0.5 w-full bg-linear-to-r from-white/80 to-transparent" />
         </div>
       </motion.div>
 
-      {/* Categories */}
-      <div className="space-y-20">
-        {Object.entries(categorizedSkills).map(
-          ([category, skills], categoryIndex) => (
-            <motion.div
+      {/* Tabs */}
+      <motion.div
+        className="mb-10 flex flex-wrap gap-2"
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.1 }}
+      >
+        {categories.map((category) => {
+          const isActive = category === activeTab;
+          return (
+            <button
               key={category}
-              variants={containerVariants}
-              whileInView="visible"
-              viewport={{
-                once: true,
-                amount: 0.05,
-                margin: "0px 0px -50px 0px",
-              }}
-              transition={{ delay: categoryIndex * 0.1 }}
+              onClick={() => setActiveTab(category)}
+              className={`
+                relative px-5 py-2 rounded-full text-sm font-medium tracking-wide
+                border transition-all duration-200
+                ${
+                  isActive
+                    ? "bg-white/10 border-white/30 text-white"
+                    : "bg-transparent border-white/10 text-neutral-500 hover:text-neutral-300 hover:border-white/20"
+                }
+              `}
             >
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                {skills.map((skill) => {
-                  const colorClasses =
-                    skillColors[skill.color] ??
-                    "bg-white/5 border-white/10 text-white";
+              {category}
+              {isActive && (
+                <motion.span
+                  layoutId="tab-indicator"
+                  className="absolute inset-0 rounded-full bg-white/5"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                />
+              )}
+            </button>
+          );
+        })}
+      </motion.div>
 
-                  return (
-                    <motion.div
-                      key={skill.name}
-                      className={`group flex flex-col items-center justify-center gap-3
-                        rounded-xl border p-6 backdrop-blur-sm transition-all
-                        hover:scale-[1.04] hover:shadow-lg cursor-pointer
-                        ${colorClasses}`}
-                      variants={fadeIn}
-                      whileHover={{
-                        transition: { duration: 0.2 },
-                      }}
-                    >
-                      <motion.div
-                        className="text-4xl transition-transform duration-300 group-hover:scale-110"
-                        whileHover={{ rotate: 15 }}
-                        transition={{ duration: 0.1, ease: "easeInOut" }}
-                      >
-                        {skill.icon}
-                      </motion.div>
-                      <span className="text-sm font-medium tracking-wide">
-                        {skill.name}
-                      </span>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          ),
-        )}
-      </div>
+      {/* Skills Grid */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeTab}
+          variants={contentVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
+        >
+          {activeSkills.map((skill) => {
+            const colorClasses =
+              skillColors[skill.color] ??
+              "bg-white/5 border-white/10 text-white";
+
+            return (
+              <motion.div
+                key={skill.name}
+                className={`group flex flex-col items-center justify-center gap-3
+                  rounded-xl border p-6 backdrop-blur-sm transition-all
+                  hover:scale-[1.04] hover:shadow-lg cursor-pointer
+                  ${colorClasses}`}
+                variants={fadeIn}
+                whileHover={{ transition: { duration: 0.2 } }}
+              >
+                <motion.div
+                  className="text-4xl transition-transform duration-300 group-hover:scale-110"
+                  whileHover={{ rotate: 15 }}
+                  transition={{ duration: 0.1, ease: "easeInOut" }}
+                >
+                  {skill.icon}
+                </motion.div>
+                <span className="text-sm font-medium tracking-wide">
+                  {skill.name}
+                </span>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+      </AnimatePresence>
     </section>
   );
 };

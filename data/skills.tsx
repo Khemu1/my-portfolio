@@ -35,6 +35,7 @@ import {
   SiTravisci,
   SiSqlite,
   SiRedis,
+  SiNestjs,
 } from "react-icons/si";
 import { RiSupabaseFill } from "react-icons/ri";
 import { TbBrandNuxt } from "react-icons/tb";
@@ -57,9 +58,10 @@ export const categorizedSkills = {
   ],
 
   backend: [
-    { icon: <FaNodeJs />, name: "Node.js", color: "green" },
+    { icon: <FaNodeJs />, name: "Nodejs", color: "green" },
     { icon: <BiLogoTypescript />, name: "TypeScript", color: "blue" },
-    { icon: <SiExpress />, name: "Express.js", color: "dark" },
+    { icon: <SiExpress />, name: "ExpressJs", color: "dark" },
+    { icon: <SiNestjs />, name: "NestJs", color: "red" },
     { icon: <SiGraphql />, name: "GraphQL", color: "pink" },
     { icon: <FaLock />, name: "JWT", color: "amber" },
     { icon: <SiPm2 />, name: "PM2", color: "lime" },
