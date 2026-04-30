@@ -36,6 +36,7 @@ import {
   SiSqlite,
   SiRedis,
   SiNestjs,
+  SiMocha,
 } from "react-icons/si";
 import { RiSupabaseFill } from "react-icons/ri";
 import { TbBrandNuxt } from "react-icons/tb";
@@ -94,5 +95,8 @@ export const categorizedSkills = {
     { icon: <SiPostman />, name: "Postman", color: "orange" },
   ],
 
-  testing: [{ icon: <SiJest />, name: "Jest", color: "red" }],
+  testing: [
+    { icon: <SiJest />, name: "Jest", color: "red" },
+    { icon: <SiMocha />, name: "Mocha", color: "mocha" },
+  ],
 };

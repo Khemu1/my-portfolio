@@ -25,6 +25,7 @@ const skillColors: Record<string, string> = {
   slate: "bg-slate-500/10 border-slate-400/30 text-slate-300",
   dark: "bg-black/30 border-white/20 text-neutral-300",
   nuxt: "bg-[#00DC82]/10 border-[#00DC82]/20 text-[#4ADE80]",
+  mocha: "bg-amber-900/20 border-amber-800/40 text-amber-500",
 };
 
 const fadeIn: Variants = {
