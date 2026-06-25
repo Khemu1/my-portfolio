@@ -152,7 +152,6 @@ const ProjectCard = ({
               {project.title}
             </h3>
           </div>
-          <StatusBadge status={project.status ?? ""} />
         </div>
 
         <p className="text-sm text-white/60 leading-relaxed line-clamp-2">
@@ -334,7 +333,6 @@ const ProjectDialog = ({
               </p>
               <h2 className="text-2xl font-bold text-white">{project.title}</h2>
             </div>
-            <StatusBadge status={project.status ?? ""} />
           </div>
 
           <p className="text-white/70 leading-relaxed text-sm">
