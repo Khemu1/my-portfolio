@@ -35,7 +35,7 @@ const ContactCard = ({ icon, label, link }: ContactCardProps) => {
     >
       {/* Icon */}
       <motion.div
-        className="text-purple-400 group-hover:text-purple-300 transition-colors duration-300 transform "
+        className="text-blue-500 group-hover:text-blue-300 transition-colors duration-300 transform "
         whileHover={{ rotate: 5, scale: 1.1 }}
       >
         {icon}

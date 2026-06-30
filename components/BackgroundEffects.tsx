@@ -2,14 +2,14 @@ export default function BackgroundEffects() {
   return (
     <>
       {/* Base */}
-      <div className="absolute inset-0 bg-[#0b0816] h-full" />
+      <div className="absolute inset-0 bg-[#03060e] h-full" />
 
       {/* Main gradient */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(rgba(38, 21, 67, 0.9) 0%, rgba(48, 22, 94, 0.8) 30%, rgb(12, 10, 26) 65%)",
+            "radial-gradient(rgba(8, 18, 42, 0.92) 0%, rgba(6, 28, 55, 0.85) 30%, rgb(3, 5, 12) 65%)",
         }}
       />
 
@@ -18,13 +18,13 @@ export default function BackgroundEffects() {
         className="absolute inset-0 h-full"
         style={{
           background:
-            "radial-gradient(at 70% 20%, rgba(140, 85, 255, 0.25) 0%, transparent 40%), radial-gradient(at 15% 75%, rgba(90, 30, 150, 0.2) 0%, transparent 45%), radial-gradient(at 85% 80%, rgba(170, 120, 255, 0.18) 0%, transparent 35%)",
+            "radial-gradient(at 70% 20%, rgba(45, 100, 200, 0.22) 0%, transparent 42%), radial-gradient(at 15% 75%, rgba(15, 70, 120, 0.2) 0%, transparent 48%), radial-gradient(at 85% 80%, rgba(70, 130, 220, 0.16) 0%, transparent 38%)",
         }}
       />
 
       {/* GRID – placed ABOVE gradients */}
       <svg
-        className="absolute inset-0 w-full h-full opacity-10"
+        className="absolute inset-0 w-full h-full opacity-[0.12]"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
       >
