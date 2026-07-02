@@ -48,18 +48,17 @@ export default function Home() {
               className="text-3xl md:text-4xl font-medium text-neutral-300"
               variants={fadeUp}
             >
-              Full Stack Developer
+              Backend Developer
             </motion.h2>
 
             <motion.p
               className="text-lg md:text-xl text-neutral-400 leading-relaxed"
               variants={fadeUp}
             >
-              Self-motivated backend-leaning full stack developer with hands-on
-              experience building scalable, secure, and efficient web
-              applications. Skilled in API design, database architecture, and
-              real-time systems, with solid frontend expertise using modern
-              JavaScript frameworks.
+              Self-motivated backend developer with hands-on experience building
+              scalable, secure, and efficient web applications. Skilled in API
+              design, database architecture, and real-time systems — with solid
+              fullstack range when a project calls for owning the whole stack.
             </motion.p>
 
             <motion.div
