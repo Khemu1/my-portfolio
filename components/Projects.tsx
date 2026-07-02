@@ -7,7 +7,7 @@ import {
   IoChevronForward,
   IoOpenOutline,
 } from "react-icons/io5";
-import { FiExternalLink, FiGithub } from "react-icons/fi";
+import { FiExternalLink, FiGithub, FiUsers, FiUser } from "react-icons/fi";
 import { projects } from "@/data/projects";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -74,6 +74,36 @@ const StatusBadge = ({ status }: { status: string }) => {
       className={`inline-block px-2.5 py-0.5 rounded-full text-xs font-medium ${config.className}`}
     >
       {config.label}
+    </span>
+  );
+};
+
+/* ---------------- RoleBadge ---------------- */
+// Shows what Ali personally built and whether it was a solo or team effort.
+// Kept separate from `category` (which describes the project's tech scope)
+// so team projects where only part of the stack was owned don't get
+// misread as a solo full-stack build.
+
+const RoleBadge = ({ project }: { project: Project }) => {
+  const myRole = project.myRole as string | undefined;
+  const collaboration = project.collaboration as string | undefined;
+
+  if (!myRole) return null;
+
+  const isTeam = collaboration === "team";
+
+  return (
+    <span
+      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium
+        bg-sky-500/10 text-sky-300 border border-sky-500/20"
+      title={
+        isTeam
+          ? `Team project — my role: ${myRole}`
+          : `Solo project — ${myRole}`
+      }
+    >
+      {isTeam ? <FiUsers size={11} /> : <FiUser size={11} />}
+      {isTeam ? `Team · ${myRole} role` : `Solo · ${myRole}`}
     </span>
   );
 };
@@ -145,9 +175,12 @@ const ProjectCard = ({
       <div className="flex flex-col flex-1 p-4 gap-2.5">
         <div className="flex items-start justify-between gap-2">
           <div>
-            <p className="text-xs uppercase tracking-wider text-white/40 mb-1">
-              {project.category}
-            </p>
+            <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+              <p className="text-xs uppercase tracking-wider text-white/40">
+                {project.category}
+              </p>
+              <RoleBadge project={project} />
+            </div>
             <h3 className="text-base font-semibold text-white leading-snug">
               {project.title}
             </h3>
@@ -328,9 +361,12 @@ const ProjectDialog = ({
         <div className="px-5 pb-6 space-y-4">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-wider text-white/40 mb-1">
-                {project.category}
-              </p>
+              <div className="flex items-center gap-1.5 mb-1 flex-wrap">
+                <p className="text-xs uppercase tracking-wider text-white/40">
+                  {project.category}
+                </p>
+                <RoleBadge project={project} />
+              </div>
               <h2 className="text-2xl font-bold text-white">{project.title}</h2>
             </div>
           </div>

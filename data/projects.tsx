@@ -4,6 +4,8 @@ export const projects = [
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "Prime Academy",
     description: `A modern E-learning platform that supports both locally uploaded videos and YouTube videos. It features an interactive quiz system inspired by Quizizz, allows awarding prizes to students, and includes a robust chat system between students and teachers. The platform also includes a quiz and assessment system with grade tracking, enabling teachers to monitor student performance and progress across courses.
 The platform leverages Cloudflare R2 for scalable file uploads and provides a full-featured admin dashboard for managing courses, users, students, enrollments, tournaments, inquiries, and exhibitions.
@@ -56,6 +58,8 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Backend",
+    myRole: "Fullstack",
+    collaboration: "team",
     title: "Health Bridge",
     description: `A full-stack doctor-patient booking platform with AI chatbot support, bilingual (Arabic & English) interfaces, and role-based access control. Features a custom scheduling engine with recurring weekly slots, date-specific availability, rolling booking windows, and minimum notice hour enforcement. Integrates Google Workspace APIs to auto-generate Meet links and send synchronized email confirmations on booking. Resolves double-booking race conditions using Redis distributed locking with atomic SET NX EX, ownership tracking, exponential backoff, and heartbeat renewal. Optimized booking response times from 2–3s to under 500ms by running Google Meet creation and notifications asynchronously with cron-based retry fallback. Implements real-time AI chatbot streaming via SSE with per-connection identity tracking and unique stream IDs.`,
     stack: [
@@ -84,6 +88,8 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "CloudKode Mentor",
     description: `A two-sided mentorship platform supporting 1-on-1 and group session booking, built with Next.js on the frontend for SEO-optimized mentor profiles and Express.js on the backend. Implements Redis-based distributed locks to prevent double-booking race conditions and rate limiting for API protection. Integrates LinkedIn OAuth2 via Passport.js and consumes the People API to auto-populate user profiles on registration. Automates mentor badge generation server-side using Puppeteer and records attendance via Google Reports API to power the mentee banning system. Handles file storage with AWS S3, schema validation with Zod, and modular relational data access with Drizzle ORM. Includes full moderation infrastructure: user banning, appeal handling, mentor reporting, and post-session email notifications via Gmail API.`,
     stack: [
@@ -132,6 +138,8 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Backend",
+    myRole: "Backend",
+    collaboration: "team",
     title: "IK Academy",
     description: `The backend for a freelance e-learning platform — handling everything from user authentication 
     (JWT & Google OAuth) to live video sessions (100ms), real-time chat (Socket.IO), and online 
@@ -192,6 +200,8 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "Blogy",
     description: `A full-featured Markdown-powered blogging platform that allows users to create, edit, and publish blog posts with live preview. The application includes a commenting system for user engagement and a search functionality to find posts by title or content. Features chunked image uploads via FilePond, JWT-based authentication with role-based authorization, and Zod validation for robust input handling. Employs Redis for request rate limiting to mitigate abuse, with unit and integration tests written in Jest and automated CI/CD via GitHub Actions.`,
     stack: [
@@ -229,6 +239,8 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "Omni Store",
     description: `An E-Commerce site, featuring a full-featured shopping experience with user authentication,
 product listings, shopping cart, and wishlist`,
@@ -262,6 +274,8 @@ product listings, shopping cart, and wishlist`,
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "Survey Builder",
     description: `A real-time web application for creating, sharing, and collaborating on surveys. Users can effortlessly design surveys and invite others to collaborate. Powered by WebSocket technology, the platform delivers live updates, ensuring all collaborators stay instantly synchronized with the latest changes. This project served as inspiration for SyntaxError.`,
     stack: [
@@ -288,6 +302,8 @@ product listings, shopping cart, and wishlist`,
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "Syntax Error",
     description: `A website that showcases available courses and allows users to subscribe. It features a comprehensive dashboard for managing courses and admins, with an integrated quiz system that enables course creators to design and manage quizzes, review grading workflows, and display submissions effectively. Integrates Google Sheets API to log and track quiz submissions and grading data in real-time.`,
     stack: [
@@ -331,6 +347,8 @@ product listings, shopping cart, and wishlist`,
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Frontend",
+    myRole: "Frontend",
+    collaboration: "solo",
     title: "Anime Web Streaming",
     description: `A frontend-only anime platform built with Nuxt.js, featuring anime browsing, advanced search with fully customisable query filters, and per-title language switching for original, romanised, or English names. Users can bookmark anime, receive notifications for new episodes, and check a global airing calendar to see when upcoming episodes air. Includes a theme switcher, and supports importing or syncing watch history from external services like MyAnimeList and AniList.`,
     stack: [
@@ -366,6 +384,8 @@ product listings, shopping cart, and wishlist`,
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Backend",
+    myRole: "Backend",
+    collaboration: "solo",
     title: "Space Launch System",
     description: `A full-stack application that manages upcoming space launches and planetary data. It allows users to view, add, and abort launches while maintaining a list of habitable exoplanets using NASA Exoplanet Archive. Additionally, it integrates the SpaceX API to display a list of completed SpaceX launch missions.`,
     stack: [
@@ -395,6 +415,8 @@ product listings, shopping cart, and wishlist`,
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
     title: "Promptopia",
     description: `A web application designed to provide a platform for creating and sharing writing
 prompts. Users can explore various prompts.`,
