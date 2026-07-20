@@ -87,6 +87,53 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     id: crypto.randomUUID
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
+    category: "Backend",
+    myRole: "Fullstack",
+    collaboration: "solo",
+    title: "StockFlow",
+    description: `A microservices-based warehouse management system with an API gateway routing to four independent services — Auth, Inventory, Orders, and Payment — that communicate exclusively through RabbitMQ, with no direct service-to-service calls. Handles the full warehouse lifecycle: receiving stock via inbound orders, shipping via outbound orders, tracking stock levels across multiple warehouses, and order/payment review through a React + shadcn/ui dashboard.
+
+    Orders are not auto-processed — staff manually review each order and choose to accept, accept with payment, or cancel. The Orders service fetches confirmed payment status and user info from other services on demand to support this, rather than payment automatically triggering the next step.
+
+    Uses pessimistic locking and idempotent stock movements to keep inventory accurate when multiple staff members receive or ship stock concurrently across warehouses. Background stock processing runs through BullMQ, backed by Redis, to keep the API responsive under load. JWT authentication is validated at the gateway by querying the Auth service over the broker, consistent with the rest of the system's communication pattern.
+
+    Uses global exception filters in each service to keep error response shapes consistent across the entire API, regardless of which service handled the request. Winston handles structured logging across the API gateway and all four services for consistent, centralized observability.`,
+    stack: [
+      { name: "NestJS" },
+      { name: "TypeScript" },
+      { name: "RabbitMQ" },
+      { name: "BullMQ" },
+      { name: "PostgreSQL" },
+      { name: "Redis" },
+      { name: "React" },
+      { name: "Shadcn" },
+      { name: "TailwindCSS" },
+      { name: "Zustand" },
+      { name: "React Query" },
+      { name: "Zod" },
+      { name: "Docker Compose" },
+      { name: "Swagger" },
+    ],
+    mainImage: "/projects/stock-flow/Screenshot 2026-07-20 043713.png",
+    album: [
+      "/projects/stock-flow/Screenshot 2026-07-20 043806.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043813.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043820.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043830.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043839.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043850.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043858.png",
+      "/projects/stock-flow/Screenshot 2026-07-20 043918.png",
+    ],
+    videos: [],
+    live: null,
+    github: "https://github.com/Khemu1/Warehouse-Management-System",
+    status: "completed",
+  },
+  {
+    id: crypto.randomUUID
+      ? crypto.randomUUID()
+      : Math.random().toString(36).substr(2, 9),
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
