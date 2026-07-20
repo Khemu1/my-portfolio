@@ -87,7 +87,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     id: crypto.randomUUID
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
-    category: "Backend",
+    category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
     title: "StockFlow",
