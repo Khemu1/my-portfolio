@@ -58,7 +58,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
       ? crypto.randomUUID()
       : Math.random().toString(36).substr(2, 9),
     category: "Backend",
-    myRole: "Fullstack",
+    myRole: "Backend",
     collaboration: "team",
     title: "Health Bridge",
     description: `A full-stack doctor-patient booking platform with AI chatbot support, bilingual (Arabic & English) interfaces, and role-based access control. Features a custom scheduling engine with recurring weekly slots, date-specific availability, rolling booking windows, and minimum notice hour enforcement. Integrates Google Workspace APIs to auto-generate Meet links and send synchronized email confirmations on booking. Resolves double-booking race conditions using Redis distributed locking with atomic SET NX EX, ownership tracking, exponential backoff, and heartbeat renewal. Optimized booking response times from 2–3s to under 500ms by running Google Meet creation and notifications asynchronously with cron-based retry fallback. Implements real-time AI chatbot streaming via SSE with per-connection identity tracking and unique stream IDs.`,
