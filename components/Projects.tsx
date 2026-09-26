@@ -331,7 +331,7 @@ const ProjectDialog = ({
                 <>
                   <motion.button
                     onClick={scrollPrev}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
+                    className="absolute left-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/70 border border-white/20 text-white shadow-lg opacity-0 group-hover:opacity-100 transition"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     aria-label="Previous image"
@@ -340,7 +340,7 @@ const ProjectDialog = ({
                   </motion.button>
                   <motion.button
                     onClick={scrollNext}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full backdrop-blur-md bg-white/20 border border-white/30 text-white opacity-0 group-hover:opacity-100 transition"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/70 border border-white/20 text-white shadow-lg opacity-0 group-hover:opacity-100 transition"
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     aria-label="Next image"
@@ -348,7 +348,7 @@ const ProjectDialog = ({
                     <IoChevronForward size={20} />
                   </motion.button>
 
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm text-xs text-white/70">
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/70 border border-white/10 text-xs text-white/90">
                     {images.length} images
                   </div>
                 </>
@@ -535,7 +535,6 @@ const Projects = () => {
         </AnimatePresence>
       </motion.div>
 
-      {/* Dialog */}
       <ProjectDialog
         project={selectedProject}
         open={dialogOpen}
