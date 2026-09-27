@@ -1,8 +1,6 @@
 export const projects = [
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "prime-academy",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -54,9 +52,76 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "dokana",
+    category: "Fullstack",
+    myRole: "Fullstack",
+    collaboration: "solo",
+    title: "Dokana",
+    description: `A multi-tenant e-commerce SaaS platform enabling small Egyptian businesses to launch and manage online stores without technical expertise. Each store is fully isolated with its own products, customers, orders, and settings, resolved dynamically via subdomain slug or custom domain. Implements a variant-based product system supporting arbitrary option combinations (size, color, etc.) with per-variant pricing and stock, time-boxed product discounts, category-based deposit percentages for partial-payment products, and customer reviews with ratings.
+
+Customers choose a payment method at checkout (Cash on Delivery, Vodafone Cash, or InstaPay); the order is placed and the owner is notified by email to settle payment and fulfillment manually — keeping the platform payment-processor-agnostic while still giving owners a clear, structured handoff. Order lifecycle is fully tracked through a status workflow (pending, confirmed, delivered, cancelled, refunded), backed by an order ledger for complete audit trails and a request system for customer-initiated cancellations and refunds, with owners notified by email on both new orders and cancellations. Both owners and customers can generate and print order receipts.
+
+Product images are uploaded and served via Cloudflare R2. Ships with a role-based (Admin/Owner) management dashboard including platform-wide and per-store analytics, and a fully bilingual (Arabic/English) storefront — with complete RTL/LTR support, dark mode, and mobile-first responsive design — that customers across both languages can use natively. Authentication is JWT-based across both dashboard and storefront, with bcrypt password hashing and per-store uniqueness constraints on customer identity.`,
+    stack: [
+      { name: "NestJS" },
+      { name: "TypeORM" },
+      { name: "PostgreSQL" },
+      { name: "React" },
+      { name: "Next.js" },
+      { name: "TailwindCSS" },
+      { name: "Shadcn" },
+      { name: "Zustand" },
+      { name: "React Query" },
+      { name: "Zod" },
+      { name: "JWT" },
+      { name: "bcrypt" },
+      { name: "Cloudflare R2" },
+    ],
+    mainImage: "/projects/dokana/dashboard/Screenshot 2026-09-26 203849.png",
+    album: [
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 203849.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 203908.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 203919.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 203926.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 203936.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 203947.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204114.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204123.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204133.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204700.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204708.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204724.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204735.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204744.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204753.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204808.png",
+      "/projects/dokana/dashboard/Screenshot 2026-09-26 204818.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210102.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210115.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210152.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210204.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210217.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210236.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210249.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210315.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210318.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210329.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210356.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210403.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 210905.png",
+      "/projects/dokana/storefront/Screenshot 2026-09-26 211157.png",
+    ],
+    videos: [
+      "https://youtu.be/QFZf0q1egSQ",
+      "https://youtu.be/emDyuz_hLeg",
+      "https://youtu.be/Zq7aaMsmGeo",
+    ],
+    live: null,
+    github: null,
+    status: "completed",
+  },
+  {
+    id: "health-bridge",
     category: "Backend",
     myRole: "Backend",
     collaboration: "team",
@@ -84,9 +149,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "stock-flow",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -131,9 +194,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "cloudkode-mentor",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -181,9 +242,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "ik-academy",
     category: "Backend",
     myRole: "Backend",
     collaboration: "team",
@@ -243,9 +302,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     status: "cancelled",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "blogy",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -282,77 +339,7 @@ The platform leverages Cloudflare R2 for scalable file uploads and provides a fu
     ],
   },
   {
-    // Dokana — moved here
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
-    category: "Fullstack",
-    myRole: "Fullstack",
-    collaboration: "solo",
-    title: "Dokana",
-    description: `A multi-tenant e-commerce SaaS platform enabling small Egyptian businesses to launch and manage online stores without technical expertise. Each store is fully isolated with its own products, customers, orders, and settings, resolved dynamically via subdomain slug or custom domain. Implements a variant-based product system supporting arbitrary option combinations (size, color, etc.) with per-variant pricing and stock, time-boxed product discounts, category-based deposit percentages for partial-payment products, and customer reviews with ratings.
-
-Customers choose a payment method at checkout (Cash on Delivery, Vodafone Cash, or InstaPay); the order is placed and the owner is notified by email to settle payment and fulfillment manually — keeping the platform payment-processor-agnostic while still giving owners a clear, structured handoff. Order lifecycle is fully tracked through a status workflow (pending, confirmed, delivered, cancelled, refunded), backed by an order ledger for complete audit trails and a request system for customer-initiated cancellations and refunds, with owners notified by email on both new orders and cancellations. Both owners and customers can generate and print order receipts.
-
-Product images are uploaded and served via Cloudflare R2. Ships with a role-based (Admin/Owner) management dashboard including platform-wide and per-store analytics, and a fully bilingual (Arabic/English) storefront — with complete RTL/LTR support, dark mode, and mobile-first responsive design — that customers across both languages can use natively. Authentication is JWT-based across both dashboard and storefront, with bcrypt password hashing and per-store uniqueness constraints on customer identity.`,
-    stack: [
-      { name: "NestJS" },
-      { name: "TypeORM" },
-      { name: "PostgreSQL" },
-      { name: "React" },
-      { name: "Next.js" },
-      { name: "TailwindCSS" },
-      { name: "Shadcn" },
-      { name: "Zustand" },
-      { name: "React Query" },
-      { name: "Zod" },
-      { name: "JWT" },
-      { name: "bcrypt" },
-      { name: "Cloudflare R2" },
-    ],
-    mainImage: "/projects/dokana/dashboard/Screenshot 2026-09-26 203849.png",
-    album: [
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 203849.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 203908.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 203919.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 203926.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 203936.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 203947.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204114.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204123.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204133.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204700.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204708.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204724.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204735.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204744.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204753.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204808.png",
-      "/projects/dokana/dashboard/Screenshot 2026-09-26 204818.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210102.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210115.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210152.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210204.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210217.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210236.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210249.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210315.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210318.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210329.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210356.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210403.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 210905.png",
-      "/projects/dokana/storefront/Screenshot 2026-09-26 211157.png",
-    ],
-    videos: [],
-    live: null,
-    github: null,
-    status: "completed",
-  },
-  {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "omni-store",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -385,9 +372,7 @@ product listings, shopping cart, and wishlist`,
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "survey-builder",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -413,9 +398,7 @@ product listings, shopping cart, and wishlist`,
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "syntax-error",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",
@@ -458,9 +441,7 @@ product listings, shopping cart, and wishlist`,
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "anime-web-streaming",
     category: "Frontend",
     myRole: "Frontend",
     collaboration: "solo",
@@ -495,9 +476,7 @@ product listings, shopping cart, and wishlist`,
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "space-launch-system",
     category: "Backend",
     myRole: "Backend",
     collaboration: "solo",
@@ -526,9 +505,7 @@ product listings, shopping cart, and wishlist`,
     status: "completed",
   },
   {
-    id: crypto.randomUUID
-      ? crypto.randomUUID()
-      : Math.random().toString(36).substr(2, 9),
+    id: "promptopia",
     category: "Fullstack",
     myRole: "Fullstack",
     collaboration: "solo",

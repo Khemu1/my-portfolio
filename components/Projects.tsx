@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import {
   IoChevronBack,
@@ -17,6 +17,16 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 type Project = (typeof projects)[0];
 type Category = "All" | "Fullstack" | "Backend" | "Frontend";
+
+/* ---------------- constants ---------------- */
+
+/**
+ * Explicit display order. Projects not listed here will keep their
+ * relative order from the source array and appear after the ranked ones.
+ *
+ * Dokana is intentionally placed right after Prime Academy.
+ */
+const PROJECT_ORDER: string[] = ["Prime Academy", "Dokana"];
 
 /* ---------------- helpers ---------------- */
 
@@ -46,6 +56,55 @@ const getYouTubeId = (url: string) => {
   return url;
 };
 
+const titleCache = new Map<string, string | null>();
+function extractVideoUrl(entry: unknown): string | undefined {
+  if (typeof entry === "string") return entry;
+  if (entry && typeof entry === "object" && "url" in entry) {
+    return (entry as { url?: string }).url;
+  }
+  return undefined;
+}
+
+export function useYouTubeTitle(rawEntry: unknown) {
+  const url = extractVideoUrl(rawEntry);
+  const [title, setTitle] = useState<string | null>(
+    url ? (titleCache.get(url) ?? null) : null,
+  );
+
+  useEffect(() => {
+    if (!url) return;
+
+    if (titleCache.has(url)) {
+      setTitle(titleCache.get(url) ?? null);
+      return;
+    }
+
+    let cancelled = false;
+
+    fetch(
+      `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`,
+    )
+      .then((res) => {
+        if (!res.ok) throw new Error("oEmbed failed");
+        return res.json();
+      })
+      .then((data: { title?: string }) => {
+        const t = data.title ?? null;
+        titleCache.set(url, t);
+        if (!cancelled) setTitle(t);
+      })
+      .catch(() => {
+        titleCache.set(url, null);
+        if (!cancelled) setTitle(null);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [url]);
+
+  return title;
+}
 const STATUS_CONFIG = {
   completed: {
     label: "Completed",
@@ -231,45 +290,72 @@ const VideoSection = ({
       <h4 className="text-xs uppercase tracking-wider text-white/40 mb-3">
         Videos ({videos.length})
       </h4>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        {videos.map((video, i) => {
-          const videoId = getYouTubeId(video);
-          const thumbnailUrl = failedThumbnails.has(videoId)
-            ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
-            : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-
-          return (
-            <a
-              key={i}
-              href={video}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative block w-full aspect-video rounded-xl overflow-hidden bg-black/40"
-            >
-              <Image
-                src={thumbnailUrl}
-                alt={`${title} - Video ${i + 1}`}
-                fill
-                sizes="(max-width: 768px) 100vw, 50vw"
-                className="object-cover"
-                onError={() =>
-                  setFailedThumbnails((prev) => new Set(prev).add(videoId))
-                }
-                priority={i < 2}
-              />
-              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition flex items-center justify-center">
-                <div className="p-3 rounded-full bg-white/20 backdrop-blur-md group-hover:scale-110 transition">
-                  <IoOpenOutline size={22} className="text-white" />
-                </div>
-              </div>
-              <div className="absolute bottom-2 right-2 px-2 py-0.5 rounded-md bg-black/60 backdrop-blur-sm text-xs text-white/80">
-                Video {i + 1}
-              </div>
-            </a>
-          );
-        })}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {videos.map((video, i) => (
+          <VideoThumbnail
+            key={i}
+            video={video}
+            index={i}
+            title={title}
+            failedThumbnails={failedThumbnails}
+            setFailedThumbnails={setFailedThumbnails}
+          />
+        ))}
       </div>
     </div>
+  );
+};
+
+const VideoThumbnail = ({
+  video,
+  index,
+  title,
+  failedThumbnails,
+  setFailedThumbnails,
+}: {
+  video: string;
+  index: number;
+  title: string;
+  failedThumbnails: Set<string>;
+  setFailedThumbnails: React.Dispatch<React.SetStateAction<Set<string>>>;
+}) => {
+  const videoId = getYouTubeId(video);
+  const videoTitle = useYouTubeTitle(video);
+  const thumbnailUrl = failedThumbnails.has(videoId)
+    ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`
+    : `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
+
+  return (
+    <a
+      href={video}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block w-full aspect-video rounded-xl overflow-hidden bg-black/40"
+    >
+      <Image
+        src={thumbnailUrl}
+        alt={videoTitle ?? `${title} - Video ${index + 1}`}
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        className="object-cover"
+        onError={() =>
+          setFailedThumbnails((prev) => new Set(prev).add(videoId))
+        }
+        priority={index < 2}
+      />
+      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition flex items-center justify-center">
+        <div className="p-3 rounded-full bg-white/20 backdrop-blur-md group-hover:scale-110 transition">
+          <IoOpenOutline size={22} className="text-white" />
+        </div>
+      </div>
+
+      {/* Title overlay at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 p-2 bg-gradient-to-t from-black/80 to-transparent">
+        <p className="text-xs text-white/90 font-medium truncate">
+          {videoTitle ?? `Video ${index + 1}`}
+        </p>
+      </div>
+    </a>
   );
 };
 
@@ -448,13 +534,20 @@ const Projects = () => {
     return counts;
   }, []);
 
-  const filtered = useMemo(
-    () =>
+  const filtered = useMemo(() => {
+    const base =
       activeCategory === "All"
         ? projects
-        : projects.filter((p) => p.category === activeCategory),
-    [activeCategory],
-  );
+        : projects.filter((p) => p.category === activeCategory);
+
+    return [...base].sort((a, b) => {
+      const ai = PROJECT_ORDER.indexOf(a.title);
+      const bi = PROJECT_ORDER.indexOf(b.title);
+      const aRank = ai === -1 ? Number.POSITIVE_INFINITY : ai;
+      const bRank = bi === -1 ? Number.POSITIVE_INFINITY : bi;
+      return aRank - bRank;
+    });
+  }, [activeCategory]);
 
   const openProject = (project: Project) => {
     setSelectedProject(project);
@@ -518,7 +611,7 @@ const Projects = () => {
         <AnimatePresence mode="popLayout">
           {filtered.map((project, idx) => (
             <motion.div
-              key={project.id ?? project.title}
+              key={project.id}
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.9 }}
